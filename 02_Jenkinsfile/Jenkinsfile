@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        IMAGENAME = "devopsyolujenkins"
+        IMAGENAME = "muslumhanozturk/test:jenkins"
         AWS = "847413486587"
-        AWSREGION = "eu-central-1"
+        AWSREGION = "us-east-1"
 
     } 
     stages {
