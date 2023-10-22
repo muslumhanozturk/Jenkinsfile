@@ -33,6 +33,20 @@ pipeline {
                 environment name: 'name', value: 'production' 
             }
         }
+        stage('Build-4') {
+            steps {
+                sh 'echo "hello world"'
+                sh '''
+                echo $name
+                echo $url
+                echo "ilk step"
+                sleep 15
+                '''
+            }
+            when{
+                environment name: 'name', value: 'test'
+            }
+        }
         stage('Build-3') {
             parallel {
                 stage('Paralel1'){
@@ -46,7 +60,7 @@ pipeline {
                     steps {
                         sh '''
                         echo 'ilk paralel'
-                        sleep 10 '''
+                        sleep 25 '''
                     }
                 }
             }
