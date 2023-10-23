@@ -1,0 +1,80 @@
+//   Jenkinsfile test-1
+
+pipeline {
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                echo 'Clarusway_Way to Reinvent Yourself'
+                sh 'echo Integrating Jenkins Pipeline with GitHub Webhook using Jenkinsfile'
+            }
+        }
+    }
+}
+
+
+//   Jenkinsfile test-2
+
+pipeline {
+    agent any
+    stages {
+        stage('run') {
+            steps {
+                echo 'Clarusway_Way to Reinvent Yourself'
+                sh 'python3 --version'
+                sh 'python3 pipeline.py'
+            }
+        }
+    }
+}
+
+
+//   Jenkinsfile test-3
+
+pipeline {
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                echo 'Compiling the java source code'
+                sh 'javac Hello.java'
+            }
+        }
+        stage('run') {
+            steps {
+                echo 'Running the compiled java code.'
+                sh 'java Hello'
+            }
+        }
+    }
+}
+
+
+//   Jenkinsfile test-4
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -f hello-app/pom.xml -B -DskipTests clean package'
+            }
+            post {
+                success {
+                    echo "Now Archiving the Artifacts....."
+                    archiveArtifacts artifacts: '**/*.jar'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn -f hello-app/pom.xml test'
+            }
+            post {
+                always {
+                    junit 'hello-app/target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
